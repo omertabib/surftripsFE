@@ -4,8 +4,10 @@ import { UserAddComponent } from './user-add/user-add.component'
 import { UserGetComponent } from './user-get/user-get.component'
 import { UserEditComponent } from './user-edit/user-edit.component'
 import { UserLoginComponent } from './user-login/user-login.component'
+import { TripAddComponent } from './trips/trip-add/trip-add.component'
 import { FeedComponent } from './feed/feed.component'
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+
 
 const routes: Routes = [
   {
@@ -19,6 +21,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: UserAddComponent
+  },
+  {
+    path: 'addTrip',
+    component: TripAddComponent
   },
   {
     path: 'user/edit/:id',

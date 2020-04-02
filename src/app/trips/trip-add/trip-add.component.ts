@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TripService } from '../../services/trip.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-trip-add',
@@ -6,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trip-add.component.css']
 })
 export class TripAddComponent implements OnInit {
+  tripForm: FormGroup;
+  user;
+  constructor(private tripService: TripService, private userService: UserService, private fb: FormBuilder) {
 
-  constructor() { }
+   }
+
+  addTrip(destination, description) {
+    this.tripService.addTrip(destination, description, this.user);
+  }
 
   ngOnInit(): void {
+    this.userService.getCurrentUser().subscribe(res => {
+      this.user = res;
+    });
+
+    this.tripForm = this.fb.group({
+      destination: ['', Validators.required ],
+      description: ['', Validators.required ],
+    });
   }
 
 }

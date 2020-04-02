@@ -1,1 +1,13 @@
-<p>feed works!</p>
+<div *ngIf="trips">
+    <div *ngFor="let trip of trips">
+        <div class="tripBlock">
+            <div class="content">
+                <h4 class="title">{{trip.destination}}</h4>
+                <p class="subtitle">{{trip.description}}</p>
+            </div>
+            <div class="actions">
+                <p>Capacity: 2/8</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+.tripBlock {
+    width: 100%;
+    border: 1px solid #cfcfcf;
+    border-left-color: chartreuse;
+    border-left-width: 5px;
+    border-radius: 15px;
+    margin-top: 15px;
+    padding: 10px;
+    display: flex;
+}
+
+.tripBlock .content {
+    /*float: left;*/
+}
+.tripBlock .content .title {
+
+}
+
+.tripBlock .content .subtitle {
+    color: #cfcfcf;
+}
+
+.tripBlock .actions {
+    margin-left: auto;
+    border-left: 1px solid #cfcfcf;
+    width: 15%;
+    padding: 10px;
+}
