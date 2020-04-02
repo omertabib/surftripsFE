@@ -16,6 +16,8 @@ import { AuthService } from './services/auth.service';
 
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { FeedComponent } from './feed/feed.component';
+import { TripAddComponent } from './trips/trip-add/trip-add.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     UserAddComponent,
     UserGetComponent,
     UserEditComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    FeedComponent,
+    TripAddComponent
   ],
   imports: [
     BrowserModule,

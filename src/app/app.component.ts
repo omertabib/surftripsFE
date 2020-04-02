@@ -17,6 +17,12 @@ export class AppComponent {
     if(localStorage.getItem('token')) return true;
   }
 
+  isProvider(): boolean {
+    if(this.user && this.user.role == 2) {
+      return true;
+    }
+    return false;
+  }
   user: any  ;
   username: any ;
   email: any;
@@ -27,13 +33,12 @@ export class AppComponent {
       this.email = user['email'];
     });
 
-
     this._router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
     });
 
     if (!this.isLoggedIn()) {
-      this.router.navigate(['login']);
+      //this.router.navigate(['login']);
       console.log('router=====', this.router.url);
     }
     else if(this.isLoggedIn()) {

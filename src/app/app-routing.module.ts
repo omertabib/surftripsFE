@@ -4,20 +4,26 @@ import { UserAddComponent } from './user-add/user-add.component'
 import { UserGetComponent } from './user-get/user-get.component'
 import { UserEditComponent } from './user-edit/user-edit.component'
 import { UserLoginComponent } from './user-login/user-login.component'
+import { FeedComponent } from './feed/feed.component'
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: FeedComponent
+  },
   {
     path: 'login',
     component: UserLoginComponent
   },
   {
-    path: 'user/create',
+    path: 'signup',
     component: UserAddComponent
   },
   {
     path: 'user/edit/:id',
-    component: UserEditComponent
+    component: UserEditComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'user',
