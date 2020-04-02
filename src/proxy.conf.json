@@ -1,0 +1,7 @@
+{
+    "/*": {
+        "target": "https://surftrips-backend.herokuapp.com/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
