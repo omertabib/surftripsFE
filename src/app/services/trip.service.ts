@@ -8,7 +8,8 @@ import {BehaviorSubject, forkJoin} from 'rxjs';
 })
 export class TripService {
 
-  uri = 'http://localhost:4001/trips';
+  //uri = 'http://localhost:4001/trips';
+  uri = 'https://surftrips-backend.herokuapp.com/trips';
 
   constructor(private http: HttpClient, private router: Router) { }
 

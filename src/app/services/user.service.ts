@@ -7,7 +7,8 @@ import {BehaviorSubject, forkJoin} from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  uri = 'http://localhost:4001/users';
+  //uri = 'http://localhost:4001/users';
+  uri = 'https://surftrips-backend.herokuapp.com/users';
   
   logout = new BehaviorSubject(false);
   headerUsernameName$ = new BehaviorSubject({});
