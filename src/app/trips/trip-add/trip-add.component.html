@@ -11,7 +11,55 @@
                   Destination is required.
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>From date*</label>
+                    <mat-form-field>
+                        <input 
+                        type="text"
+                        name="fromDate" 
+                        matInput
+                        [matDatepicker]="from" 
+                        [min]="startMinDate" 
+                        [max]="startMaxNotEditDate" 
+                        (dateChange)="endDateChange($event.target.value)"
+                        formControlName="fromDate"
+                        #fromDate
+                        />
+                        <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                        <mat-datepicker #from></mat-datepicker>
+                    </mat-form-field>
+                    <div *ngIf="tripForm.controls['fromDate'].invalid && (tripForm.controls['fromDate'].dirty || tripForm.controls['fromDate'].touched)" class="alert alert-danger">
+                        <div *ngIf="tripForm.controls['fromDate'].errors.required">
+                            From Date is required.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6">
+                    <label>To*</label>
+                    <mat-form-field>
+                        <input
+                        type="text"
+                        name="toDate"
+                        matInput
+                        [matDatepicker]="to"
+                        [min]="endMinDate"
+                        autocomplete="off"
+                        (dateChange)="startDateChange($event.target.value)"
+                        formControlName="toDate"
+                        #toDate
+                        />
+                        <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                        <mat-datepicker #to></mat-datepicker>
+                    </mat-form-field>
+                    <div *ngIf="tripForm.controls['toDate'].invalid && (tripForm.controls['toDate'].dirty || tripForm.controls['toDate'].touched)" class="alert alert-danger">
+                        <div *ngIf="tripForm.controls['toDate'].errors.required">
+                            To Date is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-md-4">Description</label>
                 <textarea type="text" class="form-control" formControlName="description" #description> </textarea>
@@ -23,8 +71,18 @@
             </div>
 
             <div class="form-group">
+                <label class="col-md-4">Trip Maximum Capacity</label>
+                <input type="number" min="1" max="50" class="form-control col-sm-1" formControlName="capacity" #capacity />
+            </div>
+            <div *ngIf="tripForm.controls['capacity'].invalid && (tripForm.controls['capacity'].dirty || tripForm.controls['capacity'].touched)" class="alert alert-danger">
+                <div *ngIf="tripForm.controls['capacity'].errors.required">
+                Maximum capacity is required.
+                </div>
+            </div>
+
+            <div class="form-group">
                 <button type="submit" class="btn btn-primary" [disabled]="tripForm.pristine || tripForm.invalid"
-                (click) = "addTrip(destination.value, description.value)">Add User</button>
+                (click) = "addTrip(destination.value, fromDate.value, toDate.value, description.value, capacity.value)">Add Trip</button>
             </div>
         </form>
     </div>

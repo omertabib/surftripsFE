@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import {UserService} from '../services/user.service' ;
 import {AppComponent} from '../app.component'
@@ -12,7 +12,7 @@ import {Router} from '@angular/router' ;
 export class UserLoginComponent implements OnInit {
   angForm: FormGroup;
   
-  constructor(private fb: FormBuilder, public userService: UserService , public router: Router) { 
+  constructor(private fb: FormBuilder, public userService: UserService , public router: Router, public cd: ChangeDetectorRef) { 
     this.createForm();
   }
   message: string ;
@@ -42,6 +42,7 @@ export class UserLoginComponent implements OnInit {
         this.loginStatus = false ;
         console.log(user['token']);
         localStorage.setItem('token' , user['token']);
+        this.cd.detectChanges;
         this.router.navigate(['/user']);
       }
     } , err => {

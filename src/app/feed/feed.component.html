@@ -1,12 +1,34 @@
+<h1 class="display-4">Surf Trips</h1>
+<small>This is your feed, here you can search for surf trips.</small>
+<br>
+<mat-progress-bar *ngIf="tripsLoading" mode="indeterminate"></mat-progress-bar>
 <div *ngIf="trips">
     <div *ngFor="let trip of trips">
-        <div class="tripBlock">
+        <div class="tripBlock" matBadge="Members: {{trip.membersCount}} / {{trip.capacity}}" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="primary">
             <div class="content">
                 <h4 class="title">{{trip.destination}}</h4>
+                <small>{{trip.fromDate | date: "dd-MM-yyyy"}} - {{trip.toDate | date: "dd-MM-yyyy"}}</small>
                 <p class="subtitle">{{trip.description}}</p>
             </div>
             <div class="actions">
-                <p>Capacity: 2/8</p>
+                <div class="members">
+                    <mat-chip color="primary" style="margin-bottom: 10px;">
+                        <span>Members: 
+                            {{trip.membersCount}}
+                            /
+                            <span *ngIf="trip.capacity">{{trip.capacity}}</span>
+                            <span *ngIf="!trip.capacity">?</span>
+                        </span>
+                    </mat-chip>
+                    <mat-chip-list>
+                        <small><mat-chip color="primary" *ngIf="trip.membersCount / trip.capacity > 0.5" selected>50%+ full capacity</mat-chip></small>
+                    </mat-chip-list>
+                </div>
+                <div class="buttons">
+                    <button *ngIf="!trip.userIsMember && isLoggedIn()" mat-mini-fab color="primary" (click)="joinTrip(trip)"><i class="fas fa-plus"></i></button>
+                    <button *ngIf="trip.userIsMember == true && isLoggedIn()" mat-mini-fab color="warn" (click)="joinTrip(trip)"><i class="fas fa-minus"></i></button>
+                    <a routerLink="/trip/{{trip.id}}"><button mat-mini-fab color="green"><i class="fas fa-ellipsis-h"></i></button></a>
+                </div>
             </div>
         </div>
     </div>

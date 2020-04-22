@@ -16,6 +16,29 @@
 
 }
 
+.mat-badge-content {
+    width: auto;
+    display: grid;
+    min-width: 32px;
+    min-height: 28px;
+    text-align: center;
+    align-items: center;
+    padding: 5px 3px;
+    top: -20px;
+    right: -22px;
+    border-radius: 5px;
+}
+
+button[mat-mini-fab] {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+button[color="green"] {
+    background-color: lawngreen;
+}
+
 .tripBlock .content .subtitle {
     color: #cfcfcf;
 }
@@ -23,6 +46,15 @@
 .tripBlock .actions {
     margin-left: auto;
     border-left: 1px solid #cfcfcf;
-    width: 15%;
+    min-width: 30%;
+    width: 30%;
     padding: 10px;
+}
+
+.tripBlock .members {
+    display: flex;
+}
+
+.tripBlock .actions .buttons {
+    display: flex;
 }

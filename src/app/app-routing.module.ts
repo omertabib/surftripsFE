@@ -7,6 +7,7 @@ import { UserLoginComponent } from './user-login/user-login.component'
 import { TripAddComponent } from './trips/trip-add/trip-add.component'
 import { FeedComponent } from './feed/feed.component'
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+import { TripShowComponent } from './trips/trip-show/trip-show.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'addTrip',
     component: TripAddComponent
+  },
+  {
+    path: 'trip/:id',
+    component: TripShowComponent
   },
   {
     path: 'user/edit/:id',

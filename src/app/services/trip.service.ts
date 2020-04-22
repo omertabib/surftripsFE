@@ -9,18 +9,21 @@ import {BehaviorSubject, forkJoin} from 'rxjs';
 export class TripService {
 
   //uri = 'http://localhost:4001/trips';
-  uri = 'https://surftrips-backend.herokuapp.com/trips';
+  uri = 'https://cors-anywhere.herokuapp.com/https://surftrips-backend.herokuapp.com/trips';
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  addTrip(destination, description, user) {
+  addTrip(destination, fromDate, toDate, description, capacity, user) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization : `Bearer ${token}`
     });
     const obj = {
       destination: destination,
+      fromDate: fromDate,
+      toDate: toDate,
       description: description,
+      capacity: capacity,
       user: user._id
     };
     console.log(obj);
@@ -30,7 +33,36 @@ export class TripService {
   }
 
   getTrips() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*'
+    });
     return this.http.get(`${this.uri}/`);
   }
 
+  getTrip(id) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization : `Bearer ${token}`
+    });
+    const obj = {
+      id: id
+    };
+    console.log(id);
+    return this.http.post(`${this.uri}/getTrip`, obj,{headers});
+  }
+
+  joinTrip(trip, user) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization : `Bearer ${token}`
+    });
+
+    var obj = {
+      trip: trip,
+      user: user
+    }
+    return this.http.post(`${this.uri}/joinTrip`, obj, {headers});
+  }
 }

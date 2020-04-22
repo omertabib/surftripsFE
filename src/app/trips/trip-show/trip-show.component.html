@@ -1,0 +1,44 @@
+<div *ngIf="tripLoaded == false" class="progressSpinner">
+    <mat-progress-spinner
+    class="progressSpinner"
+    color="primary"
+    mode="determinate"
+    value="{{loadProgress}}">
+    </mat-progress-spinner>
+    Loading
+</div>
+<div *ngIf="trip && tripLoaded == true">
+    <h1 class="display-4"><img *ngIf="trip.countryDetails" src="{{trip.countryDetails.FlagPng}}" class="flag"/> Trip to {{trip.destination}}</h1>
+    <small>{{trip.description}}</small>
+    <div class="container">
+        <span style="font-weight: bold;">Trip Dates:</span> {{trip.fromDate | date: "dd-MM-yyyy"}} To {{trip.toDate | date: "dd-MM-yyyy"}} <br>
+        <span style="font-weight: bold;">Trip Members:</span> {{trip.members.length}} <br>
+        <span style="font-weight: bold;">Trip Provider:</span> {{trip.provider.username}}
+    </div>
+    <mat-accordion>
+        <mat-expansion-panel *ngIf="trip.countryDetails" (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Provider Information
+            </mat-panel-title>
+            <mat-panel-description>
+              A bit about {{trip.provider.username}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>{{trip.provider.username}}</p>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="trip.countryDetails" (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Country Information
+            </mat-panel-title>
+            <mat-panel-description>
+              A bit about {{trip.destination}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
