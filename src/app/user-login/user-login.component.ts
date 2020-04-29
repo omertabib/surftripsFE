@@ -17,6 +17,7 @@ export class UserLoginComponent implements OnInit {
   }
   message: string ;
   loginStatus = false ;
+  loginLoading = false;
 
 
   ngOnInit(): void {
@@ -36,10 +37,14 @@ export class UserLoginComponent implements OnInit {
       password: password
     }
     console.log(loginForm);
+    this.message = "Please wait";
+    this.loginLoading = true;
+    this.cd.detectChanges();
     this.userService.login(loginForm).subscribe(user => {
       if (user) {
         this.userService.logout.next(true);
         this.loginStatus = false ;
+        this.loginLoading = false;
         console.log(user['token']);
         localStorage.setItem('token' , user['token']);
         this.cd.detectChanges;
@@ -47,9 +52,11 @@ export class UserLoginComponent implements OnInit {
       }
     } , err => {
       this.loginStatus = false ;
-      this.router.navigate(['/']);
-
+      this.loginLoading = false;
+      //this.router.navigate(['/']);
       this.message = err.error.message ;
+      console.error(this.message);
+      this.cd.detectChanges();
     });
   }
 

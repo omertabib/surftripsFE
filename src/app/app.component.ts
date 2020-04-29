@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import { NavigationCancel, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 
@@ -27,7 +27,11 @@ export class AppComponent {
   username: any ;
   email: any;
 
-  constructor(private router: Router, private _loadingBar: SlimLoadingBarService, private _router: Router, private userService: UserService) {
+  constructor(private router: Router, 
+    private _loadingBar: SlimLoadingBarService, 
+    private _router: Router, 
+    private userService: UserService,
+    private cd: ChangeDetectorRef) {
     this.userService.headerUsernameName$.subscribe(user =>{    
       this.username  = user['username'] ;
       this.email = user['email'];
@@ -50,7 +54,7 @@ export class AppComponent {
         this.userService.headerUsernameName$.next({ email : user['email'], username : user['username']});
         localStorage.setItem('username', user['username']);
         localStorage.setItem('email', user['email']);
-        // this.ref.detectChanges();
+        this.cd.detectChanges();
       });
     }
 
@@ -69,6 +73,7 @@ export class AppComponent {
 
       localStorage.removeItem('token') ;
       this.router.navigate(['/']);
+      this.cd.detectChanges();
   }
 
   private navigationInterceptor(event: Event): void {

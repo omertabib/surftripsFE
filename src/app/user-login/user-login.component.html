@@ -1,5 +1,12 @@
+<mat-progress-bar
+class="example-margin"
+color="primary"
+mode="indeterminate"
+*ngIf="loginLoading == true">
+</mat-progress-bar>
 <div class="card">
     <div class="card-body">
+        <span *ngIf="message">{{message}}</span>
         <form [formGroup]="angForm" novalidate>
 
             <div class="form-group">
