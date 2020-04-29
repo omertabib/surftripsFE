@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { TripService } from '../../services/trip.service'
 import { UserService } from '../../services/user.service';
@@ -17,6 +18,8 @@ import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 })
 export class TripShowComponent implements OnInit {
   trip;
+  providerOtherTrips;
+
   panelOpenState = false;
   tripLoaded = false;
   loadProgress = 0;
@@ -43,8 +46,13 @@ export class TripShowComponent implements OnInit {
         });
       }).then((res) => {
         this.loadProgress = 100;
+        this.cd.detectChanges;
         this.tripLoaded = true;
         console.log(res);
+        this.tripService.getUserTrips(this.trip.provider._id).subscribe(otherTrips => {
+          console.log("Provider trips:", otherTrips);
+          this.providerOtherTrips = otherTrips;
+        });
         this.cd.detectChanges;
       });
     });

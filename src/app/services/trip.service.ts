@@ -13,7 +13,7 @@ export class TripService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  addTrip(destination, fromDate, toDate, description, capacity, user) {
+  addTrip(destination, fromDate, toDate, description, capacity, user, flightChecked, accommodationChecked, transportationChecked) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization : `Bearer ${token}`
@@ -24,7 +24,10 @@ export class TripService {
       toDate: toDate,
       description: description,
       capacity: capacity,
-      user: user._id
+      user: user._id,
+      flightsIncluded: flightChecked,
+      accommodationIncluded: accommodationChecked,
+      transportationIncluded: transportationChecked
     };
     console.log(obj);
     this.http.post(`${this.uri}/create`, obj, {headers}).subscribe(res => {
@@ -51,6 +54,14 @@ export class TripService {
     };
     console.log(id);
     return this.http.post(`${this.uri}/getTrip`, obj,{headers});
+  }
+
+  getUserTrips(id) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization : `Bearer ${token}`
+    });
+    return this.http.get(`${this.uri}/getUserTrips/${id}`, {headers});
   }
 
   joinTrip(trip, user) {

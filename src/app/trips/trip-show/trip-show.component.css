@@ -6,3 +6,11 @@ img.flag {
     margin: 0px auto;
     text-align: center;
 }
+
+mat-chip[color=flights] {
+    background-color: #101820FF;
+}
+
+mat-chip[color=transportation] {
+    background-color: #FEE715FF;
+}

@@ -28,6 +28,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MaterialModule} from './material/material.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCheckboxModule, MAT_CHECKBOX_CLICK_ACTION} from '@angular/material/checkbox';
 
 import { TripShowComponent } from './trips/trip-show/trip-show.component'  ;
 
@@ -54,8 +55,9 @@ import { TripShowComponent } from './trips/trip-show/trip-show.component'  ;
     MatDatepickerModule,
     MaterialModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
-  providers: [UserService, AuthGuardService, AuthService, CountriesService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService, MatSnackBar],
+  providers: [UserService, AuthGuardService, AuthService, CountriesService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService, MatSnackBar,{provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

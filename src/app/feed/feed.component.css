@@ -58,3 +58,19 @@ button[color="green"] {
 .tripBlock .actions .buttons {
     display: flex;
 }
+
+.facilities {
+    display: flex;
+}
+
+.facilities button {
+    cursor: default;
+}
+
+.facilities button:hover {
+    cursor: default;
+}
+
+button[color=transportation] {
+    background-color: #FEE715FF;
+}

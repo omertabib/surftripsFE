@@ -10,10 +10,17 @@
 <div *ngIf="trip && tripLoaded == true">
     <h1 class="display-4"><img *ngIf="trip.countryDetails" src="{{trip.countryDetails.FlagPng}}" class="flag"/> Trip to {{trip.destination}}</h1>
     <small>{{trip.description}}</small>
-    <div class="container">
+    <div class="container" style="margin: 10px 0px;">
         <span style="font-weight: bold;">Trip Dates:</span> {{trip.fromDate | date: "dd-MM-yyyy"}} To {{trip.toDate | date: "dd-MM-yyyy"}} <br>
-        <span style="font-weight: bold;">Trip Members:</span> {{trip.members.length}} <br>
+        <span style="font-weight: bold;">Trip Members:</span> {{trip.members.length}} / {{trip.capacity}}<br>
         <span style="font-weight: bold;">Trip Provider:</span> {{trip.provider.username}}
+        <div style="margin: 10px 0px;" *ngIf="trip.facilities">
+          <mat-chip-list>
+            <mat-chip *ngIf="trip.facilities.flightsIncluded">Flights Included</mat-chip>
+            <mat-chip color="accent" selected *ngIf="trip.facilities.accommodationIncluded">Accommodation Included</mat-chip>
+            <mat-chip color="transportation" selected *ngIf="trip.facilities.transportationIncluded">Transportation Included</mat-chip>
+          </mat-chip-list>
+        </div>
     </div>
     <mat-accordion>
         <mat-expansion-panel *ngIf="trip.countryDetails" (opened)="panelOpenState = true"
@@ -26,7 +33,9 @@
               A bit about {{trip.provider.username}}
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>{{trip.provider.username}}</p>
+          <p>Username: {{trip.provider.username}}</p>
+          <p>E-Mail: {{trip.provider.email}}</p>
+          <p>Number of trips: {{providerOtherTrips?.length}}</p>
         </mat-expansion-panel>
         <mat-expansion-panel *ngIf="trip.countryDetails" (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false">
@@ -38,7 +47,8 @@
               A bit about {{trip.destination}}
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
+          <p>Country name: {{trip.countryDetails.Name}} ({{trip.countryDetails.Alpha3Code}})</p>
+          <p>Currency: {{trip.countryDetails.CurrencyName}} ({{trip.countryDetails.CurrencySymbol}} - {{trip.countryDetails.CurrencyCode}})</p>
         </mat-expansion-panel>
     </mat-accordion>
 </div>

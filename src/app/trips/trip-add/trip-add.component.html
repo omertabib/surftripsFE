@@ -81,6 +81,12 @@
             </div>
 
             <div class="form-group">
+                <label class="col-md-4">Whats included in your package?</label>
+                <mat-checkbox (click)="flightCheckedTrigger()" formControlName="flights" #flights>Flights</mat-checkbox> 
+                <mat-checkbox (click)="accommodationCheckedTrigger()" formControlName="accommodation" #accommodation>Accommodation</mat-checkbox>
+                <mat-checkbox (click)="transportationCheckedTrigger()" formControlName="transportation" #transportation>Transportation</mat-checkbox>
+            </div>
+            <div class="form-group">
                 <button type="submit" class="btn btn-primary" [disabled]="tripForm.pristine || tripForm.invalid"
                 (click) = "addTrip(destination.value, fromDate.value, toDate.value, description.value, capacity.value)">Add Trip</button>
             </div>

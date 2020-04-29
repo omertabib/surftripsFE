@@ -9,6 +9,11 @@
                 <h4 class="title">{{trip.destination}}</h4>
                 <small>{{trip.fromDate | date: "dd-MM-yyyy"}} - {{trip.toDate | date: "dd-MM-yyyy"}}</small>
                 <p class="subtitle">{{trip.description}}</p>
+                <div class="facilities" *ngIf="trip.facilities">
+                    <button mat-mini-fab color="primary" *ngIf="trip.facilities.flightsIncluded"><i class="fas fa-plane"></i></button>
+                    <button mat-mini-fab color="accent" *ngIf="trip.facilities.accommodationIncluded"><i class="fas fa-hotel"></i></button>
+                    <button mat-mini-fab color="transportation" *ngIf="trip.facilities.transportationIncluded"><i class="fas fa-taxi"></i></button>
+                </div>
             </div>
             <div class="actions">
                 <div class="members">
